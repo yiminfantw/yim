@@ -1,0 +1,7 @@
+""
+"" This vimrc is used for setting up vim color scheme.
+""
+
+
+syntax on
+color dracula
