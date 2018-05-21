@@ -14,3 +14,4 @@ source $VIM/vimrc
 "
 source $YIM_VIMRC_DIRPATH/vundle_vimrc
 source $YIM_VIMRC_DIRPATH/base_vimrc
+source $YIM_VIMRC_DIRPATH/color_scheme_vimrc
