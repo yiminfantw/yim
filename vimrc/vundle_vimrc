@@ -9,11 +9,14 @@ filetype off
 
 set runtimepath+=$YIM_BUNDLE_DIRPATH/Vundle.vim
 
-call vundle#begin()
+call vundle#begin($YIM_BUNDLE_DIRPATH)
 
 Plugin 'VundleVim/Vundle.vim'
 
 " ------------------------------ Custom plugin should be added below.
+
+Plugin 'dracula/vim'
+Plugin 'davidhalter/jedi-vim'
 
 " ------------------------------ Custom plugin should be added above.
 
