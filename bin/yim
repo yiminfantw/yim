@@ -18,8 +18,8 @@ export PYTHONPATH=`python -c "import sys;print ':'.join(p for p in sys.path if p
 export TERM=xterm-256color  # Enable color schemes.
 
 
-# -------------
-# Run commands.
+# -------------------
+# Perform operations.
 #
 # Create bundle folder and download Vundle.vim files.
 if ! [ -d "$YIM_BUNDLE_DIRPATH/Vundle.vim" ]; then

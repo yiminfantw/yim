@@ -6,3 +6,7 @@
 set number
 set hlsearch
 hi Search ctermfg=DarkGrey
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
