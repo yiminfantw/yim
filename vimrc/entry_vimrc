@@ -1,0 +1,16 @@
+"" 
+"" This is vimrc is the entry point for loading needed vimrc files.
+""
+
+
+" --------------------------
+" Source system vimrc files.
+"
+source $VIM/vimrc
+
+
+" --------------------------
+" Source custom vimrc files.
+"
+source $YIM_VIMRC_DIRPATH/vundle_vimrc
+source $YIM_VIMRC_DIRPATH/base_vimrc

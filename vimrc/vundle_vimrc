@@ -1,0 +1,22 @@
+""
+"" This vimrc holds vundle specific setup.
+""
+
+
+set nocompatible
+
+filetype off
+
+set runtimepath+=$YIM_BUNDLE_DIRPATH/Vundle.vim
+
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+" ------------------------------ Custom plugin should be added below.
+
+" ------------------------------ Custom plugin should be added above.
+
+call vundle#end()
+
+filetype plugin indent on

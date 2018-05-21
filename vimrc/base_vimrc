@@ -1,0 +1,8 @@
+""
+"" This vimrc holds base editing setup, such as showing line number, highlighting search results, etc...
+""
+
+
+set number
+set hlsearch
+hi Search ctermfg=DarkGrey

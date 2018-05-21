@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+
+# -----------------------
+# Define local variables.
+#
+root_dirpath=`dirname $0`/..
+
+
+# -----------------------------
+# Define environment variables.
+#
+export YIM_ROOT_DIRPATH=`realpath $root_dirpath`
+export YIM_VIMRC_DIRPATH=$YIM_ROOT_DIRPATH/vimrc
+export YIM_BUNDLE_DIRPATH=$YIM_ROOT_DIRPATH/bundle
+export PYTHONPATH=`python -c "import sys;print ':'.join(p for p in sys.path if p)"`
+
+
+# -------------
+# Run commands.
+#
+vim -u $YIM_VIMRC_DIRPATH/entry_vimrc $*
