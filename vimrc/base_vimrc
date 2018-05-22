@@ -3,22 +3,42 @@
 ""
 
 
-set number
-set hlsearch
-
+" ----------------------------
+" Tab and whitespace settings.
+"
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
+
+" ----------------------------
+" Highlight trail whitespaces.
+"
 set listchars=trail:·
 set list
 
 
-map <C-s> :set nonumber<CR>
+" ---------------
+" Define hotkeys.
+"
+map <c-d> <esc>:call RemoveTrailSpaces()<cr>
 
+
+" --------------
+" Misc settings.
+"
+set number
+set hlsearch
+
+
+" -----------------
+" Define functions.
+"
 function RemoveTrailSpaces()
   let cur_pos = getpos(".")
   execute '%s/\s\+$//e'
   call cursor(cur_pos[1], cur_pos[2])
+  execute ':w'
+  echom "File has been saved to " . expand('%:p')
 endfunction
 
