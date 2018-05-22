@@ -1,2 +1,7 @@
+""
+"" This vimrc is used for configuring jedi plugin.
+""
+
+
 let g:jedi#completions_enabled = 0
 let g:jedi#show_call_signatures = 0
