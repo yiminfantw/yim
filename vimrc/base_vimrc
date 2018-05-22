@@ -5,8 +5,20 @@
 
 set number
 set hlsearch
-hi Search ctermfg=DarkGrey
 
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+set listchars=trail:·
+set list
+
+
+map <C-s> :set nonumber<CR>
+
+function RemoveTrailSpaces()
+  let cur_pos = getpos(".")
+  execute '%s/\s\+$//e'
+  call cursor(cur_pos[1], cur_pos[2])
+endfunction
+
