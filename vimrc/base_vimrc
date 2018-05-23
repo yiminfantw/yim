@@ -18,27 +18,22 @@ set listchars=trail:·
 set list
 
 
+" ------------
+" Map leader.
+"
+let mapleader = " "
+
+
 " ---------------
 " Define hotkeys.
 "
-map <c-d> <esc>:call RemoveTrailSpaces()<cr>
+nmap fw :call YimText_RemoveTrailSpaces() <bar> :w!
 
 
 " --------------
 " Misc settings.
 "
-set number
-set hlsearch
-
-
-" -----------------
-" Define functions.
-"
-function RemoveTrailSpaces()
-  let cur_pos = getpos(".")
-  execute '%s/\s\+$//e'
-  call cursor(cur_pos[1], cur_pos[2])
-  execute ':w'
-  echom "File has been saved to " . expand('%:p')
-endfunction
-
+set number  " Show line number.
+set hlsearch  " Highligh search results.
+set laststatus=2  " Display status line.
+set statusline=%!YimBuffer_SetStatusLine()

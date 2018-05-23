@@ -1,0 +1,48 @@
+""
+"" This vimrc defines utility functions to be used from within yim.
+""
+
+
+" -----------------
+" Helper functions.
+"
+
+
+" -----------------------
+" Text related functions.
+"
+function YimText_RemoveTrailSpaces()
+  let cur_pos=getpos(".")
+  execute '%s/\s\+$//e'
+  call cursor(cur_pos[1], cur_pos[2])
+endfunction
+
+
+" -------------------------
+" Buffer related functions.
+"
+function YimBuffer_SetStatusLine()
+  let comps={
+  \  'file': '%f\ %r%m', 
+  \  'cursor': 'line\ %l,\ column\ %c,\ %p%%\ of\ the\ text'
+  \}
+  let settings=comps['file'] . '%=' . comps['cursor']
+  execute 'set statusline=' . settings
+endfunction
+
+
+" ----------------------
+" Git related functions.
+"
+function YimGit_ShowInfo()
+  let commands=[
+  \  'clear',
+  \  'echo [Origin Url]',
+  \  'git config --get remote.origin.url',
+  \  'echo',
+  \  'echo [Git Status]',
+  \  'git status'
+  \]
+  execute '!' . join(commands, ';')
+endfunction
+

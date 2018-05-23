@@ -6,14 +6,22 @@
 " --------------------------
 " Source system vimrc files.
 "
-source $VIM/vimrc
+"
+for sys_vimrc in [expand('$VIM/vimrc'), '/etc/vimrc']
+  if filereadable(sys_vimrc)
+    execute 'source ' . sys_vimrc
+    break
+  endif
+endfor
 
 
 " --------------------------
 " Source custom vimrc files.
 "
 source $YIM_VIMRC_DIRPATH/vundle_vimrc
+source $YIM_VIMRC_DIRPATH/utility_vimrc
 source $YIM_VIMRC_DIRPATH/base_vimrc
-source $YIM_VIMRC_DIRPATH/jedi_vimrc
+" source $YIM_VIMRC_DIRPATH/jedi_vimrc
 source $YIM_VIMRC_DIRPATH/indentline_vimrc
 source $YIM_VIMRC_DIRPATH/color_scheme_vimrc
+
