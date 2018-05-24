@@ -13,24 +13,27 @@ function YimUI_ShowKeyMapping(...)
 
   if len(flags) > 1
     echom ' '
-    echom 'Key mapping helper shortcuts:'
-    echom '  <k> + <k> : show key mapping of each category and helper shortcuts'
-    echom '  <k> + <f> : show file related key mapping'
-    echom '  <k> + <t> : show tab related key mapping'
+    echom 'General key mapping:'
+    echom '  [imap] <j> + <j> : mapping to <esc> key'
+    echom ' '
+    echom 'Key mapping instruction shortcuts:'
+    echom '  [nmap] <k> + <k> : show key mapping of each category and helper shortcuts'
+    echom '  [nmap] <k> + <f> : show file related key mapping'
+    echom '  [nmap] <k> + <t> : show tab related key mapping'
   endif
 
   for flag in flags
     if flag == 'file'
       echom ' '
       echom 'File releated key mapping:'
-      echom '  <space> + <w> : write text to current file or to specified file path'
+      echom '  [nmap] <space> + <w> : write text to current file or to specified file path'
     elseif flag == 'tab'
       echom ' '
       echom 'Tab related key mapping:'
-      echom '  <space> + <t>           : create new tab'
-      echom '  <space> + <c>           : close current tab'
-      echom '  <shift> + <right arrow> : move to next tab'
-      echom '  <shift> + <left arrow>  : move to previous tab'
+      echom '  [nmap] <space> + <t>           : create new tab'
+      echom '  [nmap] <space> + <c>           : close current tab'
+      echom '  [nmap] <shift> + <right arrow> : move to next tab'
+      echom '  [nmap] <shift> + <left arrow>  : move to previous tab'
     endif
   endfor
 

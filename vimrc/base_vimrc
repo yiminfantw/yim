@@ -27,6 +27,8 @@ let mapleader = " "
 " ---------
 " Map keys.
 "
+imap jj <esc>
+
 nmap kk :call YimUI_ShowKeyMapping()<cr>
 nmap kf :call YimUI_ShowKeyMapping('file')<cr>
 nmap kt :call YimUI_ShowKeyMapping('tab')<cr>
