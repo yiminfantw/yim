@@ -24,10 +24,19 @@ set list
 let mapleader = " "
 
 
-" ---------------
-" Define hotkeys.
+" ---------
+" Map keys.
 "
-nmap fw :call YimText_RemoveTrailSpaces() <bar> :w!
+nmap kk :call YimUI_ShowKeyMapping()<cr>
+nmap kf :call YimUI_ShowKeyMapping('file')<cr>
+nmap kt :call YimUI_ShowKeyMapping('tab')<cr>
+
+nmap <leader>w :call YimText_RemoveTrailSpaces() <bar> :w!
+
+nmap <leader>t :tabnew<cr>
+nmap <leader>c :tabclose<cr>
+nmap <s-right> :tabnext<cr>
+nmap <s-left> :tabprevious<cr>
 
 
 " --------------
@@ -37,3 +46,4 @@ set number  " Show line number.
 set hlsearch  " Highligh search results.
 set laststatus=2  " Display status line.
 set statusline=%!YimBuffer_SetStatusLine()
+

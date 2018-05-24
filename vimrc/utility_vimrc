@@ -3,14 +3,41 @@
 ""
 
 
-" -----------------
-" Helper functions.
-"
+function YimUI_ShowKeyMapping(...)
+  let input_flag=get(a:, 1, '')
+  
+  let flags = [input_flag]
+  if input_flag == ''
+    let flags=['file', 'tab']
+  endif
+
+  if len(flags) > 1
+    echom ' '
+    echom 'Key mapping helper shortcuts:'
+    echom '  <k> + <k> : show key mapping of each category and helper shortcuts'
+    echom '  <k> + <f> : show file related key mapping'
+    echom '  <k> + <t> : show tab related key mapping'
+  endif
+
+  for flag in flags
+    if flag == 'file'
+      echom ' '
+      echom 'File releated key mapping:'
+      echom '  <space> + <w> : write text to current file or to specified file path'
+    elseif flag == 'tab'
+      echom ' '
+      echom 'Tab related key mapping:'
+      echom '  <space> + <t>           : create new tab'
+      echom '  <space> + <c>           : close current tab'
+      echom '  <shift> + <right arrow> : move to next tab'
+      echom '  <shift> + <left arrow>  : move to previous tab'
+    endif
+  endfor
+
+  execute 'echo ""'
+endfunctio
 
 
-" -----------------------
-" Text related functions.
-"
 function YimText_RemoveTrailSpaces()
   let cur_pos=getpos(".")
   execute '%s/\s\+$//e'
@@ -18,9 +45,6 @@ function YimText_RemoveTrailSpaces()
 endfunction
 
 
-" -------------------------
-" Buffer related functions.
-"
 function YimBuffer_SetStatusLine()
   let comps={
   \  'file': '%f\ %r%m', 
@@ -31,9 +55,6 @@ function YimBuffer_SetStatusLine()
 endfunction
 
 
-" ----------------------
-" Git related functions.
-"
 function YimGit_ShowInfo()
   let commands=[
   \  'clear',
