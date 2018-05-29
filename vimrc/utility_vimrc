@@ -141,3 +141,15 @@ function YimBuffer_SetColorColumns(...)
 
   execute 'set colorcolumn=' . join(columns, ',')
 endfunction
+
+
+function YimBuffer_SetWorkingSessionDirectory()
+  let work_sess_dir=expand('$YIM_TEMP_DIRPATH/sessions')
+  if finddir(work_sess_dir) == ''
+    call mkdir(work_sess_dir)
+  endif
+
+  let work_sess_dir=expand(work_sess_dir . '/' . strftime("%Y%m%d-%H%M%S"))
+  call mkdir(work_sess_dir)
+  execute 'set directory=' . work_sess_dir
+endfunction

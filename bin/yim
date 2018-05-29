@@ -14,6 +14,7 @@ vundle_git_url=https://github.com/VundleVim/Vundle.vim.git
 export YIM_ROOT_DIRPATH=`realpath $root_dirpath`
 export YIM_VIMRC_DIRPATH=$YIM_ROOT_DIRPATH/vimrc
 export YIM_BUNDLE_DIRPATH=$YIM_ROOT_DIRPATH/bundle
+export YIM_TEMP_DIRPATH=`python -c "import tempfile;print tempfile.gettempdir()"`
 export PYTHONPATH=`python -c "import sys;print ':'.join(p for p in sys.path if p)"`
 export TERM=xterm-256color  # Enable color schemes.
 

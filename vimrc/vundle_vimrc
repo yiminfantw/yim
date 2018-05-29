@@ -19,6 +19,7 @@ Plugin 'dracula/vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'scrooloose/syntastic'
 
 " ------------------------------ Custom plugin should be added above.
 
