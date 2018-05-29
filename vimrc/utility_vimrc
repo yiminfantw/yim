@@ -64,7 +64,7 @@ endfunctio
 
 
 function YimText_RemoveTrailSpaces()
-  let cur_pos=getpos(".")
+  let cur_pos=getpos('.')
   execute '%s/\s\+$//e'
   call cursor(cur_pos[1], cur_pos[2])
 endfunction
@@ -149,7 +149,8 @@ function YimBuffer_SetWorkingSessionDirectory()
     call mkdir(work_sess_dir)
   endif
 
-  let work_sess_dir=expand(work_sess_dir . '/' . strftime("%Y%m%d-%H%M%S"))
+  let work_sess_dir=expand(work_sess_dir . '/' . strftime('%Y%m%d-%H%M%S'))
   call mkdir(work_sess_dir)
   execute 'set directory=' . work_sess_dir
 endfunction
+
