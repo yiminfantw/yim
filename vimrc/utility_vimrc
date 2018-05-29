@@ -3,37 +3,59 @@
 ""
 
 
+let g:up_arrow_key_nmap_doc='  [nmap] <up>    : cursor up'
+let g:down_arrow_key_nmap_doc='  [nmap] <down>  : cursor down'
+let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
+let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
+let g:page_scroll_key_mapping_state=1
+let g:tab_switch_key_mapping_state=1
+
+
 function YimUI_ShowKeyMapping(...)
   let input_flag=get(a:, 1, '')
-  
+
   let flags = [input_flag]
   if input_flag == ''
-    let flags=['file', 'tab']
+    let flags=['leader', 'file', 'tab', 'fold']
   endif
 
   if len(flags) > 1
     echom ' '
     echom 'General key mapping:'
     echom '  [imap] <j> + <j> : mapping to <esc> key'
-    echom ' '
-    echom 'Key mapping instruction shortcuts:'
     echom '  [nmap] <k> + <k> : show key mapping of each category and helper shortcuts'
-    echom '  [nmap] <k> + <f> : show file related key mapping'
-    echom '  [nmap] <k> + <t> : show tab related key mapping'
+    echom '  --'
+    echom g:up_arrow_key_nmap_doc
+    echom g:down_arrow_key_nmap_doc
+    echom g:right_arrow_key_nmap_doc
+    echom g:left_arrow_key_nmap_doc
   endif
 
   for flag in flags
-    if flag == 'file'
+    if flag == 'leader'
+      echom ' '
+      echom 'Leader key mapping:'
+      echom '  Leader key is <space>'
+      echom '  [nmap] <leader> + a : set page scroll key mapping'
+      echom '  [nmap] <leader> + s : set tab switch key mapping'
+    elseif flag == 'file'
       echom ' '
       echom 'File releated key mapping:'
-      echom '  [nmap] <space> + <w> : write text to current file or to specified file path'
+      echom '  [nmap] <w> : write text to current file or to specified file path'
     elseif flag == 'tab'
       echom ' '
       echom 'Tab related key mapping:'
-      echom '  [nmap] <space> + <t>           : create new tab'
-      echom '  [nmap] <space> + <c>           : close current tab'
+      echom '  [nmap] <t>                     : create new tab'
+      echom '  [nmap] <t> + <t>               : close current tab'
       echom '  [nmap] <shift> + <right arrow> : move to next tab'
       echom '  [nmap] <shift> + <left arrow>  : move to previous tab'
+    elseif flag == 'fold'
+      echom ' '
+      echom 'Fold related key mapping:'
+      echom '  [nmap] <f>       : open single fold'
+      echom '  [nmap] <f> + <f> : close single fold'
+      echom '  [nmap] <F>       : open all folds'
+      echom '  [nmap] <F> + <F> : close all folds'
     endif
   endfor
 
@@ -50,11 +72,49 @@ endfunction
 
 function YimBuffer_SetStatusLine()
   let comps={
-  \  'file': '%f\ %r%m', 
+  \  'file': '%f\ %r%m',
   \  'cursor': 'line\ %l,\ column\ %c,\ %p%%\ of\ the\ text'
   \}
   let settings=comps['file'] . '%=' . comps['cursor']
   execute 'set statusline=' . settings
+endfunction
+
+
+function YimBuffer_SetPageScrollKeyMapping()
+  if g:page_scroll_key_mapping_state == 1
+    nmap <up> <c-b>
+    nmap <down> <c-f>
+    echom 'Up/Down arrow keys are now in page up/down mode.'
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>   : page up'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down> : page down'
+  else
+    unmap <up>
+    unmap <down>
+    echom 'Up/Down arrow keys are now in cursor up/down mode.'
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>   : cursor up'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down> : cursor down'
+  endif
+
+  let g:page_scroll_key_mapping_state=g:page_scroll_key_mapping_state * -1
+endfunction
+
+
+function YimBuffer_SetTabSwitchKeyMapping()
+  if g:tab_switch_key_mapping_state == 1
+    nmap <right> :tabnext<cr>
+    nmap <left> :tabprevious<cr>
+    echom 'Right/Left arrow keys are now in next/previous tab mode.'
+    let g:right_arrow_key_nmap_doc='  [nmap] <right> : next tab'
+    let g:left_arrow_key_nmap_doc='  [nmap] <left>  : previous tab'
+  else
+    unmap <right>
+    unmap <left>
+    echom 'Right/Left arrow keys are now in cursor right/left mode.'
+    let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
+    let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
+  endif
+
+  let g:tab_switch_key_mapping_state=g:tab_switch_key_mapping_state * -1
 endfunction
 
 
@@ -70,3 +130,14 @@ function YimGit_ShowInfo()
   execute '!' . join(commands, ';')
 endfunction
 
+
+function YimBuffer_SetColorColumns(...)
+  let columns=[]
+
+  for idx in range(a:0)
+    let val=get(a:, idx+1, 0)
+    call add(columns, val)
+  endfor
+
+  execute 'set colorcolumn=' . join(columns, ',')
+endfunction
