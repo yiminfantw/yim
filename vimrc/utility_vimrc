@@ -20,42 +20,43 @@ function YimUI_ShowKeyMapping(...)
   endif
 
   if len(flags) > 1
-    echom ' '
-    echom 'General key mapping:'
-    echom '  [imap] <j> + <j> : mapping to <esc> key'
-    echom '  [nmap] <k> + <k> : show key mapping of each category and helper shortcuts'
-    echom '  --'
-    echom g:up_arrow_key_nmap_doc
-    echom g:down_arrow_key_nmap_doc
-    echom g:right_arrow_key_nmap_doc
-    echom g:left_arrow_key_nmap_doc
+    echo ' '
+    echo 'General key mapping:'
+    echo '  [imap] <j> + <j> : mapping to <esc> key'
+    echo '  [nmap] <k> + <k> : show key mapping of each category and helper shortcuts'
+    echo '  [nmap] <s> + <d> : show working session directory path'
+    echo '  --'
+    echo g:up_arrow_key_nmap_doc
+    echo g:down_arrow_key_nmap_doc
+    echo g:right_arrow_key_nmap_doc
+    echo g:left_arrow_key_nmap_doc
   endif
 
   for flag in flags
     if flag == 'leader'
-      echom ' '
-      echom 'Leader key mapping:'
-      echom '  Leader key is <space>'
-      echom '  [nmap] <leader> + a : set page scroll key mapping'
-      echom '  [nmap] <leader> + s : set tab switch key mapping'
+      echo ' '
+      echo 'Leader key mapping:'
+      echo '  Leader key is <space>'
+      echo '  [nmap] <leader> + a : set page scroll key mapping'
+      echo '  [nmap] <leader> + s : set tab switch key mapping'
     elseif flag == 'file'
-      echom ' '
-      echom 'File releated key mapping:'
-      echom '  [nmap] <w> : write text to current file or to specified file path'
+      echo ' '
+      echo 'File releated key mapping:'
+      echo '  [nmap] <w> : write text to current file or to specified file path'
     elseif flag == 'tab'
-      echom ' '
-      echom 'Tab related key mapping:'
-      echom '  [nmap] <t>                     : create new tab'
-      echom '  [nmap] <t> + <t>               : close current tab'
-      echom '  [nmap] <shift> + <right arrow> : move to next tab'
-      echom '  [nmap] <shift> + <left arrow>  : move to previous tab'
+      echo ' '
+      echo 'Tab related key mapping:'
+      echo '  [nmap] <t>                     : create new tab'
+      echo '  [nmap] <t> + <t>               : close current tab'
+      echo '  [nmap] <shift> + <right arrow> : move to next tab'
+      echo '  [nmap] <shift> + <left arrow>  : move to previous tab'
     elseif flag == 'fold'
-      echom ' '
-      echom 'Fold related key mapping:'
-      echom '  [nmap] <f>       : open single fold'
-      echom '  [nmap] <f> + <f> : close single fold'
-      echom '  [nmap] <F>       : open all folds'
-      echom '  [nmap] <F> + <F> : close all folds'
+      echo ' '
+      echo 'Fold related key mapping:'
+      echo '  [nmap] <f>       : open single fold'
+      echo '  [nmap] <f> + <f> : close single fold'
+      echo '  [nmap] <F>       : open all folds'
+      echo '  [nmap] <F> + <F> : close all folds'
     endif
   endfor
 
@@ -84,13 +85,13 @@ function YimBuffer_SetPageScrollKeyMapping()
   if g:page_scroll_key_mapping_state == 1
     nmap <up> <c-b>
     nmap <down> <c-f>
-    echom 'Up/Down arrow keys are now in page up/down mode.'
+    echo 'Up/Down arrow keys are now in page up/down mode.'
     let g:up_arrow_key_nmap_doc='  [nmap] <up>   : page up'
     let g:down_arrow_key_nmap_doc='  [nmap] <down> : page down'
   else
     unmap <up>
     unmap <down>
-    echom 'Up/Down arrow keys are now in cursor up/down mode.'
+    echo 'Up/Down arrow keys are now in cursor up/down mode.'
     let g:up_arrow_key_nmap_doc='  [nmap] <up>   : cursor up'
     let g:down_arrow_key_nmap_doc='  [nmap] <down> : cursor down'
   endif
@@ -103,13 +104,13 @@ function YimBuffer_SetTabSwitchKeyMapping()
   if g:tab_switch_key_mapping_state == 1
     nmap <right> :tabnext<cr>
     nmap <left> :tabprevious<cr>
-    echom 'Right/Left arrow keys are now in next/previous tab mode.'
+    echo 'Right/Left arrow keys are now in next/previous tab mode.'
     let g:right_arrow_key_nmap_doc='  [nmap] <right> : next tab'
     let g:left_arrow_key_nmap_doc='  [nmap] <left>  : previous tab'
   else
     unmap <right>
     unmap <left>
-    echom 'Right/Left arrow keys are now in cursor right/left mode.'
+    echo 'Right/Left arrow keys are now in cursor right/left mode.'
     let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
     let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
   endif
@@ -144,7 +145,7 @@ endfunction
 
 
 function YimBuffer_SetWorkingSessionDirectory()
-  let work_sess_dir=expand('$YIM_TEMP_DIRPATH/sessions')
+  let work_sess_dir=expand('$YIM_TEMP_DIRPATH/yim_sessions')
   if finddir(work_sess_dir) == ''
     call mkdir(work_sess_dir)
   endif
