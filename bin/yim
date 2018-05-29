@@ -4,7 +4,7 @@
 # -----------------------
 # Define local variables.
 #
-root_dirpath=`dirname \`realpath $0\``/..
+root_dirpath=`dirname $0`/..
 vundle_git_url=https://github.com/VundleVim/Vundle.vim.git
 
 

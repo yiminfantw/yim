@@ -18,6 +18,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'dracula/vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'Yggdroot/indentLine'
+Plugin 'scrooloose/syntastic'
 
 " ------------------------------ Custom plugin should be added above.
 

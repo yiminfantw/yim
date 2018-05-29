@@ -22,6 +22,7 @@ source $YIM_VIMRC_DIRPATH/vundle_vimrc
 source $YIM_VIMRC_DIRPATH/utility_vimrc
 source $YIM_VIMRC_DIRPATH/base_vimrc
 source $YIM_VIMRC_DIRPATH/jedi_vimrc
+source $YIM_VIMRC_DIRPATH/syntastic_vimrc
 source $YIM_VIMRC_DIRPATH/indentline_vimrc
 source $YIM_VIMRC_DIRPATH/color_scheme_vimrc
 
