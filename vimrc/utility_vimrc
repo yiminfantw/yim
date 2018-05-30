@@ -10,6 +10,7 @@ let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
 let g:page_scroll_key_mapping_state=1
 let g:tab_switch_key_mapping_state=1
 let g:buffer_resize_key_mapping_state=1
+let g:buffer_resize_orientation=1
 
 
 function YimUI_ShowKeyMapping(...)
@@ -40,7 +41,7 @@ function YimUI_ShowKeyMapping(...)
       echo '  Leader key is <space>'
       echo '  [nmap] <leader> + a : set page scroll key mapping'
       echo '  [nmap] <leader> + s : set tab switch key mapping'
-      echo '  [nmap] <leader> + d : set buffer resize key mapping'
+      echo '  [nmap] <leader> + d : set window resize key mapping'
     elseif flag == 'file'
       echo ' '
       echo 'File releated key mapping:'
@@ -162,13 +163,13 @@ function YimBuffer_SetWorkingSessionDirectory()
 endfunction
 
 
-function YimBuffer_SetBufferResizeKeyMapping()
+function YimBuffer_SetWindowResizeKeyMapping()
   if g:buffer_resize_key_mapping_state == 1
     nmap <up> : resize -1<cr>
     nmap <down> : resize +1<cr>
     nmap <right> : vertical resize +1<cr>
     nmap <left> : vertical resize -1<cr>
-    echo 'The up/down/right/left arrow keys are now in buffer resize mode.'
+    echo 'The up/down/right/left arrow keys are now in window resize mode.'
     let g:up_arrow_key_nmap_doc='  [nmap] <up>    : resize current buffer vertically by +1 unit'
     let g:down_arrow_key_nmap_doc='  [nmap] <down>  : resize current buffer vertically by -1 unit'
     let g:right_arrow_key_nmap_doc='  [nmap] <right> : resize current buffer horizontally by +1 unit'

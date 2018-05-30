@@ -43,7 +43,7 @@ nmap tt :tabclose<cr>
 
 nmap <leader>a :call YimBuffer_SetPageScrollKeyMapping()<cr>
 nmap <leader>s :call YimBuffer_SetTabSwitchKeyMapping()<cr>
-nmap <leader>d :call YimBuffer_SetBufferResizeKeyMapping()<cr>
+nmap <leader>d :call YimBuffer_SetWindowResizeKeyMapping()<cr>
 
 nmap g :call YimBuffer_SetColorColumns(72, 79, 99)<cr>
 nmap gg :set colorcolumn=<cr>
