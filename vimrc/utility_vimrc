@@ -9,6 +9,7 @@ let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
 let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
 let g:page_scroll_key_mapping_state=1
 let g:tab_switch_key_mapping_state=1
+let g:buffer_resize_key_mapping_state=1
 
 
 function YimUI_ShowKeyMapping(...)
@@ -39,6 +40,7 @@ function YimUI_ShowKeyMapping(...)
       echo '  Leader key is <space>'
       echo '  [nmap] <leader> + a : set page scroll key mapping'
       echo '  [nmap] <leader> + s : set tab switch key mapping'
+      echo '  [nmap] <leader> + d : set buffer resize key mapping'
     elseif flag == 'file'
       echo ' '
       echo 'File releated key mapping:'
@@ -85,13 +87,13 @@ function YimBuffer_SetPageScrollKeyMapping()
   if g:page_scroll_key_mapping_state == 1
     nmap <up> <c-b>
     nmap <down> <c-f>
-    echo 'Up/Down arrow keys are now in page up/down mode.'
+    echo 'The up/down arrow keys are now in page up/down mode.'
     let g:up_arrow_key_nmap_doc='  [nmap] <up>   : page up'
     let g:down_arrow_key_nmap_doc='  [nmap] <down> : page down'
   else
     unmap <up>
     unmap <down>
-    echo 'Up/Down arrow keys are now in cursor up/down mode.'
+    echo 'The up/down arrow keys are now in cursor up/down mode.'
     let g:up_arrow_key_nmap_doc='  [nmap] <up>   : cursor up'
     let g:down_arrow_key_nmap_doc='  [nmap] <down> : cursor down'
   endif
@@ -104,13 +106,13 @@ function YimBuffer_SetTabSwitchKeyMapping()
   if g:tab_switch_key_mapping_state == 1
     nmap <right> :tabnext<cr>
     nmap <left> :tabprevious<cr>
-    echo 'Right/Left arrow keys are now in next/previous tab mode.'
+    echo 'The right/left arrow keys are now in next/previous tab mode.'
     let g:right_arrow_key_nmap_doc='  [nmap] <right> : next tab'
     let g:left_arrow_key_nmap_doc='  [nmap] <left>  : previous tab'
   else
     unmap <right>
     unmap <left>
-    echo 'Right/Left arrow keys are now in cursor right/left mode.'
+    echo 'The right/left arrow keys are now in cursor right/left mode.'
     let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
     let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
   endif
@@ -145,13 +147,44 @@ endfunction
 
 
 function YimBuffer_SetWorkingSessionDirectory()
-  let work_sess_dir=expand('$YIM_TEMP_DIRPATH/yim_sessions')
-  if finddir(work_sess_dir) == ''
-    call mkdir(work_sess_dir)
+  if expand('$IS_WORKING_SESSION') == '0'
+    return
   endif
 
-  let work_sess_dir=expand(work_sess_dir . '/' . strftime('%Y%m%d-%H%M%S'))
-  call mkdir(work_sess_dir)
-  execute 'set directory=' . work_sess_dir
+  let work_sess_dirpath=expand('$YIM_TEMP_DIRPATH/yim_sessions')
+  if finddir(work_sess_dirpath) == ''
+    call mkdir(work_sess_dirpath)
+  endif
+
+  let work_sess_dirpath=expand(work_sess_dirpath . '/' . strftime('%Y%m%d-%H%M%S'))
+  call mkdir(work_sess_dirpath)
+  execute 'set directory=' . work_sess_dirpath
+endfunction
+
+
+function YimBuffer_SetBufferResizeKeyMapping()
+  if g:buffer_resize_key_mapping_state == 1
+    nmap <up> : resize -1<cr>
+    nmap <down> : resize +1<cr>
+    nmap <right> : vertical resize +1<cr>
+    nmap <left> : vertical resize -1<cr>
+    echo 'The up/down/right/left arrow keys are now in buffer resize mode.'
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>    : resize current buffer vertically by +1 unit'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down>  : resize current buffer vertically by -1 unit'
+    let g:right_arrow_key_nmap_doc='  [nmap] <right> : resize current buffer horizontally by +1 unit'
+    let g:left_arrow_key_nmap_doc='  [nmap] <left>  : resize current buffer horizontally by -1 unit'
+  else
+    unmap <up>
+    unmap <down>
+    unmap <right>
+    unmap <left>
+    echo 'The up/down/right/left arrow keys are now in cursor up/down/right/left mode.'
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>    : cursor up'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down>  : cursor down'
+    let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
+    let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
+  endif
+
+  let g:buffer_resize_key_mapping_state=g:buffer_resize_key_mapping_state * -1
 endfunction
 

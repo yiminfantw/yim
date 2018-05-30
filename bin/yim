@@ -17,6 +17,7 @@ export YIM_BUNDLE_DIRPATH=$YIM_ROOT_DIRPATH/bundle
 export YIM_TEMP_DIRPATH=`python -c "import tempfile;print tempfile.gettempdir()"`
 export PYTHONPATH=`python -c "import sys;print ':'.join(p for p in sys.path if p)"`
 export TERM=xterm-256color  # Enable color schemes.
+export IS_WORKING_SESSION=0
 
 
 # -------------------
@@ -31,4 +32,5 @@ fi
 vim -u $YIM_VIMRC_DIRPATH/entry_vimrc +PluginInstall +qall
 
 # Launch vim.
+export IS_WORKING_SESSION=1
 vim -u $YIM_VIMRC_DIRPATH/entry_vimrc $*
