@@ -3,12 +3,10 @@
 ""
 
 
-" ----------------------------
-" Tab and whitespace settings.
+" ------------------------
+" Define global variables.
 "
-set tabstop=4
-set shiftwidth=4
-set expandtab
+let g:tab_spaces=4
 
 
 " ----------------------------
@@ -18,15 +16,11 @@ set listchars=trail:·
 set list
 
 
-" ------------
-" Map leader.
-"
-let mapleader = " "
-
-
 " ---------
 " Map keys.
 "
+let mapleader = " "
+
 imap jj <esc>
 
 nmap kk :call YimUI_ShowKeyMapping()<cr>
@@ -51,6 +45,8 @@ nmap gg :set colorcolumn=<cr>
 let g:work_sess_dir=$YIM_TEMP_DIRPATH
 nmap sd :echo 'Working session directory: ' . g:work_sess_dir<cr>
 
+nmap c :call YimText_ConvertTabsToSpaces()<cr>
+
 
 " --------------
 " Misc settings.
@@ -60,4 +56,4 @@ set hlsearch  " Highligh search results.
 set laststatus=2  " Display status line.
 set statusline=%!YimBuffer_SetStatusLine()
 call YimBuffer_SetWorkingSessionDirectory()
-
+call YimText_ConvertTabsToSpaces()
