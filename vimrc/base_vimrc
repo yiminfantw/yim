@@ -41,15 +41,18 @@ nmap FF zM
 nmap t :tabnew<cr>
 nmap tt :tabclose<cr>
 
-nmap <leader>a :call YimBuffer_SetPageScrollKeyMapping()<cr>
-nmap <leader>s :call YimBuffer_SetTabSwitchKeyMapping()<cr>
-nmap <leader>d :call YimBuffer_SetWindowResizeKeyMapping()<cr>
+nmap <leader>1 :call YimBuffer_SetPageScrollKeyMapping()<cr>
+nmap <leader>2 :call YimBuffer_SetTabSwitchKeyMapping()<cr>
+nmap <leader>3 :call YimBuffer_SetWindowResizeKeyMapping()<cr>
 
 nmap g :call YimBuffer_SetColorColumns(72, 79, 99)<cr>
 nmap gg :set colorcolumn=<cr>
 
 let g:work_sess_dir=$YIM_TEMP_DIRPATH
 nmap sd :echo 'Working session directory: ' . g:work_sess_dir<cr>
+
+nmap m :execute 'DoMatchParen'<cr>
+nmap mm :execute 'NoMatchParen'<cr>
 
 
 " --------------

@@ -18,7 +18,7 @@ function YimUI_ShowKeyMapping(...)
 
   let flags = [input_flag]
   if input_flag == ''
-    let flags=['leader', 'file', 'tab', 'fold']
+    let flags=['leader', 'fileio', 'tab', 'fold', 'syntax']
   endif
 
   if len(flags) > 1
@@ -39,12 +39,12 @@ function YimUI_ShowKeyMapping(...)
       echo ' '
       echo 'Leader key mapping:'
       echo '  Leader key is <space>'
-      echo '  [nmap] <leader> + a : set page scroll key mapping'
-      echo '  [nmap] <leader> + s : set tab switch key mapping'
-      echo '  [nmap] <leader> + d : set window resize key mapping'
-    elseif flag == 'file'
+      echo '  [nmap] <leader> + 1 : set page scroll key mapping'
+      echo '  [nmap] <leader> + 2 : set tab switch key mapping'
+      echo '  [nmap] <leader> + 3 : set window resize key mapping'
+    elseif flag == 'fileio'
       echo ' '
-      echo 'File releated key mapping:'
+      echo 'File IO releated key mapping:'
       echo '  [nmap] <w> : write text to current file or to specified file path'
     elseif flag == 'tab'
       echo ' '
@@ -60,6 +60,11 @@ function YimUI_ShowKeyMapping(...)
       echo '  [nmap] <f> + <f> : close single fold'
       echo '  [nmap] <F>       : open all folds'
       echo '  [nmap] <F> + <F> : close all folds'
+    elseif flag == 'syntax'
+      echo ' '
+      echo 'Syntax related key mapping:'
+      echo '  [nmap] <m>       : Enable matching parentheses'
+      echo '  [nmap] <m> + <m> : Disable matching parentheses'
     endif
   endfor
 
