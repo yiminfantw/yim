@@ -8,6 +8,7 @@
 "
 let g:tab_spaces=4
 let g:work_sess_dirpath=$YIM_TEMP_DIRPATH
+let g:netrw_browse_split=2  " Open file in new (vertically split) window.
 
 
 " ----------------------------
@@ -49,6 +50,7 @@ nmap mm :execute 'NoMatchParen'<cr>
 
 nmap c :call YimText_ConvertTabsToSpaces()<cr>
 nmap l :SyntasticCheck<cr>
+nmap b :Explore<cr>
 
 
 " --------------

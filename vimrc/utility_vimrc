@@ -45,6 +45,7 @@ function YimUI_ShowKeyMapping(...)
     elseif flag == 'fileio'
       echo ' '
       echo 'File IO releated key mapping:'
+      echo '  [nmap] <b> : browse current directory (pwd/cwd) for opening file'
       echo '  [nmap] <w> : write text to current file or to specified file path'
     elseif flag == 'tab'
       echo ' '
