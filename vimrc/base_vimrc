@@ -50,8 +50,9 @@ nmap mm :execute 'NoMatchParen'<cr>
 
 nmap c :call YimText_ConvertTabsToSpaces()<cr>
 nmap l :SyntasticCheck<cr>
-nmap b :Explore<cr>
 
+nmap b :Explore<cr>
+nmap bb :bufferdelete<cr>
 
 " --------------
 " Misc settings.
