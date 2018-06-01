@@ -194,3 +194,10 @@ function YimBuffer_SetWindowResizeKeyMapping()
   let g:buffer_resize_key_mapping_state=g:buffer_resize_key_mapping_state * -1
 endfunction
 
+
+function YimText_ConvertTabsToSpaces()
+  execute 'set tabstop=' . g:tab_spaces
+  execute 'set shiftwidth=' . g:tab_spaces
+  execute 'set expandtab'
+  execute 'retab'
+endfunction

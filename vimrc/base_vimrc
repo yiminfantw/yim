@@ -3,12 +3,10 @@
 ""
 
 
-" ----------------------------
-" Tab and whitespace settings.
+" ------------------------
+" Define global variables.
 "
-set tabstop=4
-set shiftwidth=4
-set expandtab
+let g:tab_spaces=4
 
 
 " ----------------------------
@@ -16,12 +14,6 @@ set expandtab
 "
 set listchars=trail:·
 set list
-
-
-" ------------
-" Map leader.
-"
-let mapleader = " "
 
 
 " ---------
@@ -41,6 +33,7 @@ nmap FF zM
 nmap t :tabnew<cr>
 nmap tt :tabclose<cr>
 
+let mapleader = " "
 nmap <leader>1 :call YimBuffer_SetPageScrollKeyMapping()<cr>
 nmap <leader>2 :call YimBuffer_SetTabSwitchKeyMapping()<cr>
 nmap <leader>3 :call YimBuffer_SetWindowResizeKeyMapping()<cr>
@@ -54,6 +47,8 @@ nmap sd :echo 'Working session directory: ' . g:work_sess_dir<cr>
 nmap m :execute 'DoMatchParen'<cr>
 nmap mm :execute 'NoMatchParen'<cr>
 
+nmap c :call YimText_ConvertTabsToSpaces()<cr>
+
 
 " --------------
 " Misc settings.
@@ -63,4 +58,5 @@ set hlsearch  " Highligh search results.
 set laststatus=2  " Display status line.
 set statusline=%!YimBuffer_SetStatusLine()
 call YimBuffer_SetWorkingSessionDirectory()
+call YimText_ConvertTabsToSpaces()
 
