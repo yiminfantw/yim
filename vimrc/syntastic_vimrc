@@ -3,13 +3,14 @@
 ""
 
 
-let g:syntastic_python_checkers = ['flake8', 'pylint']
-let g:syntastic_python_pylint_exec = "/tools/SITE/rnd/pipe-lint/venv-python2.7/bin/pylint"
-let g:syntastic_python_pylint_args = "--rcfile /tools/SITE/rnd/pipe-lint/pylintconfig.txt"
-let g:syntastic_python_flake8_exec = "/tools/SITE/rnd/pipe-lint/venv-python2.7/bin/flake8"
-let g:syntastic_python_flake8_args = "--config /tools/SITE/rnd/pipe-lint/flake8config.txt"
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map={'mode': 'passive'}
+let g:syntastic_python_checkers=['flake8', 'pylint']
+let g:syntastic_python_pylint_exec="/tools/SITE/rnd/pipe-lint/venv-python2.7/bin/pylint"
+let g:syntastic_python_pylint_args="--rcfile /tools/SITE/rnd/pipe-lint/pylintconfig.txt"
+let g:syntastic_python_flake8_exec="/tools/SITE/rnd/pipe-lint/venv-python2.7/bin/flake8"
+let g:syntastic_python_flake8_args="--config /tools/SITE/rnd/pipe-lint/flake8config.txt"
+let g:syntastic_aggregate_errors=1
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0

@@ -48,6 +48,7 @@ nmap m :execute 'DoMatchParen'<cr>
 nmap mm :execute 'NoMatchParen'<cr>
 
 nmap c :call YimText_ConvertTabsToSpaces()<cr>
+nmap l :SyntasticCheck<cr>
 
 
 " --------------

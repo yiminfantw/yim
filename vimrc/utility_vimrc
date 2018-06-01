@@ -65,6 +65,7 @@ function YimUI_ShowKeyMapping(...)
       echo 'Syntax related key mapping:'
       echo '  [nmap] <m>       : Enable matching parentheses'
       echo '  [nmap] <m> + <m> : Disable matching parentheses'
+      echo '  [nmap] <l>       : Perform syntastic check'
     endif
   endfor
 
