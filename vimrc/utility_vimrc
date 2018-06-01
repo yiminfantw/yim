@@ -157,14 +157,14 @@ function YimBuffer_SetWorkingSessionDirectory()
     return
   endif
 
-  let work_sess_dirpath=expand('$YIM_TEMP_DIRPATH/yim_sessions')
-  if finddir(work_sess_dirpath) == ''
-    call mkdir(work_sess_dirpath)
+  let g:work_sess_dirpath=g:work_sess_dirpath . '/yim_sessions'
+  if finddir(g:work_sess_dirpath) == ''
+    call mkdir(g:work_sess_dirpath)
   endif
 
-  let work_sess_dirpath=expand(work_sess_dirpath . '/' . strftime('%Y%m%d-%H%M%S'))
-  call mkdir(work_sess_dirpath)
-  execute 'set directory=' . work_sess_dirpath
+  let g:work_sess_dirpath=expand(g:work_sess_dirpath . '/' . strftime('%Y%m%d-%H%M%S'))
+  call mkdir(g:work_sess_dirpath)
+  execute 'set directory=' . g:work_sess_dirpath
 endfunction
 
 
