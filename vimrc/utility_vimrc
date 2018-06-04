@@ -9,8 +9,8 @@ let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
 let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
 let g:page_scroll_key_mapping_state=1
 let g:tab_switch_key_mapping_state=1
-let g:buffer_resize_key_mapping_state=1
-let g:buffer_resize_orientation=1
+let g:window_resize_key_mapping_state=1
+let g:window_switch_key_mapping_state=1
 
 
 function YimUI_ShowKeyMapping(...)
@@ -26,7 +26,6 @@ function YimUI_ShowKeyMapping(...)
     echo 'General key mapping:'
     echo '  [imap] <j> + <j> : mapping to <esc> key'
     echo '  [nmap] <k> + <k> : show key mapping of each category and helper shortcuts'
-    echo '  [nmap] <s> + <d> : show working session directory path'
     echo '  --'
     echo g:up_arrow_key_nmap_doc
     echo g:down_arrow_key_nmap_doc
@@ -48,6 +47,7 @@ function YimUI_ShowKeyMapping(...)
       echo '  [nmap] <b>       : browse current directory (pwd/cwd) for opening file'
       echo '  [nmap] <b> + <b> : close directory browse buffer'
       echo '  [nmap] <w>       : write text to current file or to specified file path'
+      echo '  [nmap] <s> + <d> : show working session directory path'
     elseif flag == 'tab'
       echo ' '
       echo 'Tab related key mapping:'
@@ -155,7 +155,7 @@ function YimBuffer_SetColorColumns(...)
 endfunction
 
 
-function YimBuffer_SetWorkingSessionDirectory()
+function YimFileIO_SetWorkingSessionDirectory()
   if expand('$IS_WORKING_SESSION') == '0'
     return
   endif
@@ -171,8 +171,8 @@ function YimBuffer_SetWorkingSessionDirectory()
 endfunction
 
 
-function YimBuffer_SetWindowResizeKeyMapping()
-  if g:buffer_resize_key_mapping_state == 1
+function YimWindow_SetWindowResizeKeyMapping()
+  if g:window_resize_key_mapping_state == 1
     nmap <up> : resize -1<cr>
     nmap <down> : resize +1<cr>
     nmap <right> : vertical resize +1<cr>
@@ -194,7 +194,34 @@ function YimBuffer_SetWindowResizeKeyMapping()
     let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
   endif
 
-  let g:buffer_resize_key_mapping_state=g:buffer_resize_key_mapping_state * -1
+  let g:window_resize_key_mapping_state=g:window_resize_key_mapping_state * -1
+endfunction
+
+
+function YimWindow_SetWindowSwitchKeyMapping()
+  if g:window_switch_key_mapping_state == 1
+    nmap <up> <c-w><c-k>
+    nmap <down> <c-w><c-j>
+    nmap <right> <c-w><c-l>
+    nmap <left> <c-w><c-h>
+    echo 'The up/down/right/left arrow keys are now in window switch mode.'
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>    : switch to the next window upward'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down>  : switch to the next window downward'
+    let g:right_arrow_key_nmap_doc='  [nmap] <right> : switch to the next window rightward'
+    let g:left_arrow_key_nmap_doc='  [nmap] <left>  : switch to the next window leftward'
+  else
+    unmap <up>
+    unmap <down>
+    unmap <right>
+    unmap <left>
+    echo 'The up/down/right/left arrow keys are now in cursor up/down/right/left mode.'
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>    : cursor up'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down>  : cursor down'
+    let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
+    let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
+  endif
+
+  let g:window_switch_key_mapping_state=g:window_switch_key_mapping_state * -1
 endfunction
 
 

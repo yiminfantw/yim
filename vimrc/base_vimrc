@@ -38,7 +38,8 @@ nmap tt :tabclose<cr>
 let mapleader = " "
 nmap <leader>1 :call YimBuffer_SetPageScrollKeyMapping()<cr>
 nmap <leader>2 :call YimBuffer_SetTabSwitchKeyMapping()<cr>
-nmap <leader>3 :call YimBuffer_SetWindowResizeKeyMapping()<cr>
+nmap <leader>3 :call YimWindow_SetWindowResizeKeyMapping()<cr>
+nmap <leader>4 :call YimWindow_SetWindowSwitchKeyMapping()<cr>
 
 nmap g :call YimBuffer_SetColorColumns(72, 79, 99)<cr>
 nmap gg :set colorcolumn=<cr>
@@ -52,7 +53,7 @@ nmap c :call YimText_ConvertTabsToSpaces()<cr>
 nmap l :SyntasticCheck<cr>
 
 nmap b :Explore<cr>
-nmap bb :bufferdelete<cr>
+
 
 " --------------
 " Misc settings.
@@ -61,6 +62,6 @@ set number  " Show line number.
 set hlsearch  " Highligh search results.
 set laststatus=2  " Display status line.
 set statusline=%!YimBuffer_SetStatusLine()
-call YimBuffer_SetWorkingSessionDirectory()
+call YimFileIO_SetWorkingSessionDirectory()
 call YimText_ConvertTabsToSpaces()
 
