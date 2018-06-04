@@ -11,57 +11,96 @@ let g:work_sess_dirpath=$YIM_TEMP_DIRPATH
 let g:netrw_browse_split=2  " Open file in new (vertically split) window.
 
 
-" ----------------------------
-" Highlight trail whitespaces.
+" -----------------
+" General settings.
 "
+" Highlight trail whitespaces.
 set listchars=trail:·
 set list
+" Show line number.
+set number
+set hlsearch
+" Highligh search results.
+set laststatus=2
+" Set status line.
+set statusline=%!YimBuffer_SetStatusLine()
+" Set working session directory.
+call YimFileIO_SetWorkingSessionDirectory()
 
 
 " ---------
 " Map keys.
 "
+
+"
+" General key mapping.
+"
+" ESC key mapping.
 imap jj <esc>
+imap JJ <esc>:
+" Vim help key mapping.
+nmap h :help<cr>
+nmap H :help
+" Yim help key mapping.
+nmap k :call YimHelp_ShowKeyMapping()<cr>
+"
+imap qq <esc>:q!
+nmap q :q!
 
-nmap kk :call YimUI_ShowKeyMapping()<cr>
-
-nmap w :call YimText_RemoveTrailSpaces() <bar> :w!
-
-nmap f zo
-nmap ff zc
-nmap F zR
-nmap FF zM
-
-nmap t :tabnew<cr>
-nmap tt :tabclose<cr>
-
+"
+" Leader-function key mapping.
+"
 let mapleader = " "
 nmap <leader>1 :call YimBuffer_SetPageScrollKeyMapping()<cr>
 nmap <leader>2 :call YimBuffer_SetTabSwitchKeyMapping()<cr>
 nmap <leader>3 :call YimWindow_SetWindowResizeKeyMapping()<cr>
 nmap <leader>4 :call YimWindow_SetWindowSwitchKeyMapping()<cr>
 
-nmap g :call YimBuffer_SetColorColumns(72, 79, 99)<cr>
-nmap gg :set colorcolumn=<cr>
-
+"
+" File IO related key mapping.
+"
+" Browse current directory (pwd/cwd) for opening file.
+nmap b :Explore<cr>
+" Write text to current file or to specified file path.
+imap ww <esc>:call YimText_RemoveTrailSpaces() <bar> :w
+nmap w :call YimText_RemoveTrailSpaces() <bar> :w
+nmap wq :call YimText_RemoveTrailSpaces() <bar> :wq!
+" Show working session directory path.
 nmap sd :echo 'Working session directory: ' . g:work_sess_dirpath<cr>
 
+"
+" Tab related key mapping.
+"
+" Create new tab.
+nmap t :tabnew<cr>
+" Close current tab.
+nmap tt :tabclose<cr>
+
+"
+" Fold related key mapping.
+"
+" Open single fold.
+nmap f zo
+" Close single fold.
+nmap ff zc
+" Open all folds.
+nmap F zR
+" Close all folds.
+nmap FF zM
+
+"
+" Syntax related key mapping.
+"
+" Enable/disable matching parentheses.
 nmap m :execute 'DoMatchParen'<cr>
 nmap mm :execute 'NoMatchParen'<cr>
-
-nmap c :call YimText_ConvertTabsToSpaces()<cr>
+" Perform syntastic check.
 nmap l :SyntasticCheck<cr>
 
-nmap b :Explore<cr>
-
-
-" --------------
-" Misc settings.
 "
-set number  " Show line number.
-set hlsearch  " Highligh search results.
-set laststatus=2  " Display status line.
-set statusline=%!YimBuffer_SetStatusLine()
-call YimFileIO_SetWorkingSessionDirectory()
-call YimText_ConvertTabsToSpaces()
+" Coding related key mapping.
+"
+" Python specific key mapping.
+nmap <leader>p :call YimPython_SetPythonMode()
+nmap <leader>P :call YimPython_SetPythonMode() <bar> :call YimText_ConvertTabsToSpaces()
 

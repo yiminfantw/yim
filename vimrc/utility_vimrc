@@ -13,19 +13,24 @@ let g:window_resize_key_mapping_state=1
 let g:window_switch_key_mapping_state=1
 
 
-function YimUI_ShowKeyMapping(...)
+function YimHelp_ShowKeyMapping(...)
   let input_flag=get(a:, 1, '')
 
   let flags = [input_flag]
   if input_flag == ''
-    let flags=['leader', 'fileio', 'tab', 'fold', 'syntax']
+    let flags=['leader', 'fileio', 'tab', 'fold', 'coding', 'syntax']
   endif
 
   if len(flags) > 1
     echo ' '
     echo 'General key mapping:'
-    echo '  [imap] <j> + <j> : mapping to <esc> key'
-    echo '  [nmap] <k> + <k> : show key mapping of each category and helper shortcuts'
+    echo '  [imap] <j> + <j> : exit insert mode'
+    echo '  [imap] <J> + <J> : exit insert mode, wait for a command input'
+    echo '  [nmap] <h>       : open vim help document'
+    echo '  [nmap] <H>       : map to :help and wait for user input to open specific vim help document'
+    echo '  [nmap] <k>       : show yim key mapping scheme'
+    echo '  [imap] <q> + <q> : exit insert mode, quit current window'
+    echo '  [nmap] <q>       : quit current window'
     echo '  --'
     echo g:up_arrow_key_nmap_doc
     echo g:down_arrow_key_nmap_doc
@@ -36,25 +41,25 @@ function YimUI_ShowKeyMapping(...)
   for flag in flags
     if flag == 'leader'
       echo ' '
-      echo 'Leader key mapping:'
+      echo 'Leader-function key mapping:'
       echo '  Leader key is <space>'
       echo '  [nmap] <leader> + 1 : set page scroll key mapping'
       echo '  [nmap] <leader> + 2 : set tab switch key mapping'
       echo '  [nmap] <leader> + 3 : set window resize key mapping'
+      echo '  [nmap] <leader> + 4 : set window switch key mapping'
     elseif flag == 'fileio'
       echo ' '
       echo 'File IO releated key mapping:'
       echo '  [nmap] <b>       : browse current directory (pwd/cwd) for opening file'
-      echo '  [nmap] <b> + <b> : close directory browse buffer'
-      echo '  [nmap] <w>       : write text to current file or to specified file path'
+      echo '  [imap] <w> + <w> : exit insert mode, remove trail spaces, write current text to file'
+      echo '  [nmap] <w>       : remove trail spaces, write current text to file'
+      echo '  [nmap] <w> + <q> : remove trail spaces, write current text to file, quit current window'
       echo '  [nmap] <s> + <d> : show working session directory path'
     elseif flag == 'tab'
       echo ' '
       echo 'Tab related key mapping:'
       echo '  [nmap] <t>                     : create new tab'
       echo '  [nmap] <t> + <t>               : close current tab'
-      echo '  [nmap] <shift> + <right arrow> : move to next tab'
-      echo '  [nmap] <shift> + <left arrow>  : move to previous tab'
     elseif flag == 'fold'
       echo ' '
       echo 'Fold related key mapping:'
@@ -62,6 +67,9 @@ function YimUI_ShowKeyMapping(...)
       echo '  [nmap] <f> + <f> : close single fold'
       echo '  [nmap] <F>       : open all folds'
       echo '  [nmap] <F> + <F> : close all folds'
+    elseif flag == 'coding'
+      echo '  [nmap] <p> : apply python specific settings without changing current text'
+      echo '  [nmap] <P> : apply python specific settings and run functions that might change current text'
     elseif flag == 'syntax'
       echo ' '
       echo 'Syntax related key mapping:'
@@ -143,7 +151,7 @@ function YimGit_ShowInfo()
 endfunction
 
 
-function YimBuffer_SetColorColumns(...)
+function YimWindow_SetColorColumns(...)
   let columns=[]
 
   for idx in range(a:0)
@@ -231,3 +239,9 @@ function YimText_ConvertTabsToSpaces()
   execute 'set expandtab'
   execute 'retab'
 endfunction
+
+
+function YimPython_SetPythonMode()
+  execute 'call YimWindow_SetColorColumns(72, 79, 99)'
+endfunction
+
