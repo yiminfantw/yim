@@ -37,7 +37,6 @@ call YimFileIO_SetWorkingSessionDirectory()
 "
 " ESC key mapping.
 imap jj <esc>
-imap JJ <esc>:
 " Vim help key mapping.
 nmap h :help<cr>
 nmap H :help
@@ -55,6 +54,8 @@ nmap <leader>1 :call YimBuffer_SetPageScrollKeyMapping()<cr>
 nmap <leader>2 :call YimBuffer_SetTabSwitchKeyMapping()<cr>
 nmap <leader>3 :call YimWindow_SetWindowResizeKeyMapping()<cr>
 nmap <leader>4 :call YimWindow_SetWindowSwitchKeyMapping()<cr>
+nmap <leader>p :call YimPython_SetPythonMode()
+nmap <leader>pp :call YimPython_SetPythonMode() <bar> :call YimText_ConvertTabsToSpaces()
 
 "
 " File IO related key mapping.
@@ -96,11 +97,4 @@ nmap m :execute 'DoMatchParen'<cr>
 nmap mm :execute 'NoMatchParen'<cr>
 " Perform syntastic check.
 nmap l :SyntasticCheck<cr>
-
-"
-" Coding related key mapping.
-"
-" Python specific key mapping.
-nmap <leader>p :call YimPython_SetPythonMode()
-nmap <leader>P :call YimPython_SetPythonMode() <bar> :call YimText_ConvertTabsToSpaces()
 
