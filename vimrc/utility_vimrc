@@ -16,6 +16,13 @@ let g:window_switch_key_mapping_state=1
 function YimHelp_ShowKeyMapping(...)
   let input_flag=get(a:, 1, '')
 
+  echo '[G E N E R A L   I N F O]'
+  echo ' '
+  echo 'Working session directory: ' . g:work_sess_dirpath
+  echo ' '
+
+  echo '[K E Y   M A P P I N G]'
+
   let flags = [input_flag]
   if input_flag == ''
     let flags=['leader', 'fileio', 'tab', 'fold', 'coding', 'syntax']
@@ -24,12 +31,13 @@ function YimHelp_ShowKeyMapping(...)
   if len(flags) > 1
     echo ' '
     echo 'General key mapping:'
+    echo '  [nmap] <k> + <k> : show yim key mapping scheme'
     echo '  [imap] <j> + <j> : exit insert mode'
-    echo '  [nmap] <h>       : open vim help document'
-    echo '  [nmap] <H>       : map to :help and wait for user input to open specific vim help document'
-    echo '  [nmap] <k>       : show yim key mapping scheme'
-    echo '  [imap] <q> + <q> : exit insert mode, quit current window'
-    echo '  [nmap] <q>       : quit current window'
+    echo '  [imap] <J> + <J> : exit insert mode and enter command mode'
+    echo '  [nmap] <h> + <h> : open vim help document'
+    echo '  [nmap] <H> + <H> : map to :help and wait for user input to open specific vim help document'
+    echo '  [nmap] <q> + <q> : close(delete) buffer and quit if no buffer left'
+    echo '  [nmap] <b> + <b> : browse current directory (pwd/cwd) for opening file'
     echo '  --'
     echo g:up_arrow_key_nmap_doc
     echo g:down_arrow_key_nmap_doc
@@ -42,41 +50,36 @@ function YimHelp_ShowKeyMapping(...)
       echo ' '
       echo 'Leader-function key mapping:'
       echo '  Leader key is <space>'
-      echo '  [nmap] <leader> + <1>       : set page scroll key mapping'
-      echo '  [nmap] <leader> + <2>       : set tab switch key mapping'
-      echo '  [nmap] <leader> + <3>       : set window resize key mapping'
-      echo '  [nmap] <leader> + <4>       : set window switch key mapping'
-      echo '  [nmap] <leader> + <p>       : apply python specific settings'
-      echo '  [nmap] <leader> + <p> + <p> : apply python specific settings, with settings that might change current text'
+      echo '  [nmap] <leader> + <1> : set page scroll key mapping'
+      echo '  [nmap] <leader> + <2> : set tab switch key mapping'
+      echo '  [nmap] <leader> + <3> : set window resize key mapping'
+      echo '  [nmap] <leader> + <4> : set window switch key mapping'
     elseif flag == 'fileio'
       echo ' '
       echo 'File IO releated key mapping:'
-      echo '  [nmap] <b>       : browse current directory (pwd/cwd) for opening file'
-      echo '  [imap] <w> + <w> : exit insert mode, remove trail spaces, write current text to file'
-      echo '  [nmap] <w>       : remove trail spaces, write current text to file'
+      echo '  [nmap] <w> + <w> : remove trail spaces, write current text to file'
       echo '  [nmap] <w> + <q> : remove trail spaces, write current text to file, quit current window'
-      echo '  [nmap] <s> + <d> : show working session directory path'
     elseif flag == 'tab'
       echo ' '
       echo 'Tab related key mapping:'
-      echo '  [nmap] <t>                     : create new tab'
-      echo '  [nmap] <t> + <t>               : close current tab'
+      echo '  [nmap] <t> + <t>            : create new tab'
+      echo '  [nmap] <leader> + <t> + <t> : close current tab'
     elseif flag == 'fold'
       echo ' '
       echo 'Fold related key mapping:'
-      echo '  [nmap] <f>       : open single fold'
-      echo '  [nmap] <f> + <f> : close single fold'
-      echo '  [nmap] <F>       : open all folds'
-      echo '  [nmap] <F> + <F> : close all folds'
+      echo '  [nmap] <f> + <f>            : open single fold'
+      echo '  [nmap] <leader> + <f> + <f> : close single fold'
+      echo '  [nmap] <F> + <F>            : open all folds'
+      echo '  [nmap] <leader> + <F> + <F> : close all folds'
     elseif flag == 'coding'
-      echo '  [nmap] <p> : apply python specific settings without changing current text'
-      echo '  [nmap] <P> : apply python specific settings and run functions that might change current text'
+      echo ' '
+      echo '  [nmap] <c> + <m> : prompt coding mode selection'
     elseif flag == 'syntax'
       echo ' '
       echo 'Syntax related key mapping:'
-      echo '  [nmap] <m>       : Enable matching parentheses'
-      echo '  [nmap] <m> + <m> : Disable matching parentheses'
-      echo '  [nmap] <l>       : Perform syntastic check'
+      echo '  [nmap] <m> + <p>            : enable matching parentheses'
+      echo '  [nmap] <leader> + <m> + <p> : disable matching parentheses'
+      echo '  [nmap] <l> + <l> : Perform syntax linting'
     endif
   endfor
 
@@ -242,7 +245,13 @@ function YimText_ConvertTabsToSpaces()
 endfunction
 
 
-function YimPython_SetPythonMode()
+function YimCoding_PythonMode()
   execute 'call YimWindow_SetColorColumns(72, 79, 99)'
+endfunction
+
+
+function YimCoding_PythonModeAggressive()
+  execute 'call YimWindow_SetColorColumns(72, 79, 99)'
+  execute 'call YimText_ConvertTabsToSpaces()'
 endfunction
 
