@@ -56,6 +56,7 @@ nmap <leader>1 :call YimBuffer_SetPageScrollKeyMapping()<cr>
 nmap <leader>2 :call YimBuffer_SetTabSwitchKeyMapping()<cr>
 nmap <leader>3 :call YimWindow_SetWindowResizeKeyMapping()<cr>
 nmap <leader>4 :call YimWindow_SetWindowSwitchKeyMapping()<cr>
+nmap <leader>5 :call YimSyntax_SetLintingResultsNavigationKeyMapping()<cr>
 
 "
 " File IO related key mapping.

@@ -11,6 +11,7 @@ let g:page_scroll_key_mapping_state=1
 let g:tab_switch_key_mapping_state=1
 let g:window_resize_key_mapping_state=1
 let g:window_switch_key_mapping_state=1
+let g:linting_results_navigation_key_mapping_state=1
 
 
 function YimHelp_ShowKeyMapping(...)
@@ -54,6 +55,7 @@ function YimHelp_ShowKeyMapping(...)
       echo '  [nmap] <leader> + <2> : set tab switch key mapping'
       echo '  [nmap] <leader> + <3> : set window resize key mapping'
       echo '  [nmap] <leader> + <4> : set window switch key mapping'
+      echo '  [nmap] <leader> + <5> : set linting results navigation key mapping'
     elseif flag == 'fileio'
       echo ' '
       echo 'File IO releated key mapping:'
@@ -253,5 +255,26 @@ endfunction
 function YimCoding_PythonModeAggressive()
   execute 'call YimWindow_SetColorColumns(72, 79, 99)'
   execute 'call YimText_ConvertTabsToSpaces()'
+endfunction
+
+
+function YimSyntax_SetLintingResultsNavigationKeyMapping()
+  if g:linting_results_navigation_key_mapping_state == 1
+    nmap <up> :lprevious<cr>
+    nmap <down> :lnext<cr>
+    echo 'The up/down arrow keys are now in linting results navigation mode.'
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>    : go to previous linting result'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down>  : go to next linting result'
+  else
+    unmap <up>
+    unmap <down>
+    echo 'The up/down/right/left arrow keys are now in cursor up/down/right/left mode.'
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>    : cursor up'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down>  : cursor down'
+    let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
+    let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
+  endif
+
+  let g:linting_results_navigation_key_mapping_state=g:linting_results_navigation_key_mapping_state * -1
 endfunction
 
