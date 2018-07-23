@@ -7,7 +7,7 @@
 " Define global variables.
 "
 let g:tab_spaces=4
-let g:work_sess_dirpath=$YIM_TEMP_DIRPATH
+let g:work_sess_dirpath=$YIM_WORKING_SESSIONS_DIRPATH
 let g:netrw_browse_split=0  " Open file in new (vertically split) window.
 
 
@@ -26,6 +26,8 @@ set laststatus=2
 set statusline=%!YimBuffer_SetStatusLine()
 " Set working session directory.
 call YimFileIO_SetWorkingSessionDirectory()
+" Misc.
+set noswapfile
 
 
 " ---------
@@ -45,8 +47,9 @@ nmap hh :help<cr>
 nmap HH :help
 " Close(delete) buffer and quit if no buffer left.
 nmap qq :q!
-" Browse current directory (pwd/cwd) for opening file.
-nmap bb :vsplit <bar> Explore<cr>
+" Browse directory for reading file.
+nmap bb :Explore<cr>
+nmap vb :vsplit <bar> Explore<cr>
 
 "
 " Leader-function key mapping.

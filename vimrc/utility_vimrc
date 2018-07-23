@@ -38,7 +38,8 @@ function YimHelp_ShowKeyMapping(...)
     echo '  [nmap] <h> + <h> : open vim help document'
     echo '  [nmap] <H> + <H> : map to :help and wait for user input to open specific vim help document'
     echo '  [nmap] <q> + <q> : close(delete) buffer and quit if no buffer left'
-    echo '  [nmap] <b> + <b> : browse current directory (pwd/cwd) for opening file'
+    echo '  [nmap] <b> + <b> : browse directory and read selected file into browsing window'
+    echo '  [nmap] <v> + <b> : vertically split current window, browse directory and read selected file into browsing window'
     echo '  --'
     echo g:up_arrow_key_nmap_doc
     echo g:down_arrow_key_nmap_doc
@@ -113,12 +114,22 @@ function YimBuffer_SetPageScrollKeyMapping()
     echo 'The up/down arrow keys are now in page up/down mode.'
     let g:up_arrow_key_nmap_doc='  [nmap] <up>   : page up'
     let g:down_arrow_key_nmap_doc='  [nmap] <down> : page down'
+
+    " Reset cursor right and left keys just so they can function normally.
+    nmap <right> :echo "No response for page moving"<cr>
+    nmap <left> :echo "No response for page moving"<cr>
+    let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
+    let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
   else
     unmap <up>
     unmap <down>
+    unmap <right>
+    unmap <left>
     echo 'The up/down arrow keys are now in cursor up/down mode.'
-    let g:up_arrow_key_nmap_doc='  [nmap] <up>   : cursor up'
-    let g:down_arrow_key_nmap_doc='  [nmap] <down> : cursor down'
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>    : cursor up'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down>  : cursor down'
+    let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
+    let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
   endif
 
   let g:page_scroll_key_mapping_state=g:page_scroll_key_mapping_state * -1
@@ -132,10 +143,20 @@ function YimBuffer_SetTabSwitchKeyMapping()
     echo 'The right/left arrow keys are now in next/previous tab mode.'
     let g:right_arrow_key_nmap_doc='  [nmap] <right> : next tab'
     let g:left_arrow_key_nmap_doc='  [nmap] <left>  : previous tab'
+
+    " Reset cursor up and down keys just so they can function normally.
+    nmap <up> :echo "No response for tab switching"<cr>
+    nmap <down> :echo "No response for tab switching"<cr>
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>    : cursor up'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down>  : cursor down'
   else
+    unmap <up>
+    unmap <down>
     unmap <right>
     unmap <left>
     echo 'The right/left arrow keys are now in cursor right/left mode.'
+    let g:up_arrow_key_nmap_doc='  [nmap] <up>    : cursor up'
+    let g:down_arrow_key_nmap_doc='  [nmap] <down>  : cursor down'
     let g:right_arrow_key_nmap_doc='  [nmap] <right> : cursor right'
     let g:left_arrow_key_nmap_doc='  [nmap] <left>  : cursor left'
   endif
@@ -174,7 +195,6 @@ function YimFileIO_SetWorkingSessionDirectory()
     return
   endif
 
-  let g:work_sess_dirpath=g:work_sess_dirpath . '/yim_sessions'
   if finddir(g:work_sess_dirpath) == ''
     call mkdir(g:work_sess_dirpath)
   endif
@@ -184,13 +204,12 @@ function YimFileIO_SetWorkingSessionDirectory()
   execute 'set directory=' . g:work_sess_dirpath
 endfunction
 
-
 function YimWindow_SetWindowResizeKeyMapping()
   if g:window_resize_key_mapping_state == 1
-    nmap <up> : resize -1<cr>
-    nmap <down> : resize +1<cr>
-    nmap <right> : vertical resize +1<cr>
-    nmap <left> : vertical resize -1<cr>
+    nmap <up> :resize -1<cr>
+    nmap <down> :resize +1<cr>
+    nmap <right> :vertical resize +1<cr>
+    nmap <left> :vertical resize -1<cr>
     echo 'The up/down/right/left arrow keys are now in window resize mode.'
     let g:up_arrow_key_nmap_doc='  [nmap] <up>    : resize current buffer vertically by +1 unit'
     let g:down_arrow_key_nmap_doc='  [nmap] <down>  : resize current buffer vertically by -1 unit'
